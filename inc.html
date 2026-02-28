@@ -29,43 +29,14 @@ body{
   min-height:100vh;
   display:flex;
   justify-content:center;
-  align-items:center;
-  padding:20px;
+  align-items:flex-start; /* important for scroll */
+  padding:40px 20px;
   background:linear-gradient(120deg,var(--bg1),var(--bg2),var(--bg3));
-  overflow:hidden;
+  overflow-x:hidden; /* prevents side scroll only */
 }
 
-/* Floating Background Decorations */
-body::before,
-body::after{
-  content:"";
-  position:absolute;
-  width:300px;
-  height:300px;
-  background:rgba(255,255,255,0.25);
-  border-radius:50%;
-  filter:blur(80px);
-  animation:float 10s ease-in-out infinite alternate;
-}
-
-body::before{
-  top:-100px;
-  left:-100px;
-}
-
-body::after{
-  bottom:-100px;
-  right:-100px;
-}
-
-@keyframes float{
-  from{transform:translateY(0px);}
-  to{transform:translateY(30px);}
-}
-
-/* Main Card */
+/* MAIN CARD */
 .invitation-card{
-  position:relative;
   width:100%;
   max-width:440px;
   backdrop-filter:blur(20px);
@@ -185,6 +156,9 @@ a{
 
 /* Responsive */
 @media(max-width:480px){
+  body{
+    padding:30px 15px;
+  }
   .invitation-card{
     padding:25px 20px;
   }
@@ -202,12 +176,12 @@ a{
 <!-- INTRO -->
 <section class="section active" id="intro">
   <img src="your-photo.jpg" class="photo" alt="Amari">
-  <h1>Celebrate Amari's 1st Birthday</h1>
+  <h1>Celebrate Amari's 1st Birthday 💜</h1>
   <div class="letter">
     Dear Guest,<br><br>
     With hearts full of joy and lavender dreams,  
     we warmly invite you to celebrate this precious milestone  
-    as Amari turns ONE. 💜
+    as Amari turns ONE.
   </div>
   <button class="btn btn-primary" onclick="navigate('attendance')">Open Invitation</button>
 </section>
@@ -230,14 +204,14 @@ a{
 <!-- YES -->
 <section class="section" id="yes">
   <h1 id="welcomeMessage"></h1>
-  <p class="subtitle">Kindly scan the QR code below for details and register for confirmation.</p>
+  <p class="subtitle">Kindly scan the QR code below to complete your confirmation.</p>
   <img src="qr-code.png" class="photo" alt="QR Code">
   <a href="https://forms.gle/UwYHt289MPebbFpU6" target="_blank">Click Here to Register</a>
 </section>
 
 <!-- NO -->
 <section class="section" id="no">
-  <h1>We Completely Understand</h1>
+  <h1>We Completely Understand 💜</h1>
   <p class="subtitle">
     Thank you for letting us know.  
     Your love and kind wishes mean so much to our family.
@@ -245,7 +219,7 @@ a{
 </section>
 
 <div class="footer">
-  Designed by Nash Ken with 💜 for Amari's Special Day
+  Designed with 💜 for Amari's Special Day
 </div>
 
 </main>
@@ -256,6 +230,7 @@ function navigate(id){
     sec.classList.remove("active");
   });
   document.getElementById(id).classList.add("active");
+  window.scrollTo({top:0, behavior:"smooth"}); // ensures smooth scroll
 }
 
 function confirmAttendance(){
